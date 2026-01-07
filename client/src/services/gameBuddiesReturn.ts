@@ -1,9 +1,14 @@
 /**
  * GameBuddies Return Manager
  * Handles returning players to the GameBuddies lobby
+ *
+ * SECURITY: This service uses socket events to request returns.
+ * The server handles API calls with server-side API keys.
+ * DO NOT add API keys to this client-side code.
  */
 
 import { getCurrentSession } from './gameBuddiesSession';
+import socketService from './socketService';
 
 export type ReturnMode = 'individual' | 'group';
 
@@ -24,13 +29,14 @@ class GameBuddiesReturnManager {
   }
 
   /**
-   * Return to GameBuddies lobby
+   * Return to GameBuddies lobby via socket event
+   * SECURITY: Uses socket to server which has the API key server-side
    */
   async returnToLobby(
     mode: ReturnMode = 'group',
     roomCode: string,
     currentPlayer?: { id?: string; name?: string },
-    allPlayers?: Array<{ id?: string; name?: string }>
+    _allPlayers?: Array<{ id?: string; name?: string }>
   ): Promise<GameBuddiesReturnResponse> {
     const session = getCurrentSession();
 
@@ -54,61 +60,34 @@ class GameBuddiesReturnManager {
 
     this.isReturning = true;
 
-    const payload = {
-      roomCode,
-      returnAll: mode === 'group',
-      playerId: mode === 'individual' ? currentPlayer?.id : undefined,
-      playerName: currentPlayer?.name,
-      initiatedBy: session?.isHost ? 'host' : 'player',
-      reason: 'user_initiated',
-      metadata: {
-        game: 'bomberman',
-        timestamp: new Date().toISOString(),
-        playersInRoom: allPlayers?.length || 1
-      }
-    };
-
     try {
-      console.log(`[GameBuddiesReturn] Requesting ${mode} return for room ${roomCode}`);
+      console.log(`[GameBuddiesReturn] Requesting ${mode} return for room ${roomCode} via socket`);
 
-      const apiKey = import.meta.env.VITE_GAMEBUDDIES_API_KEY;
-
-      const headers: Record<string, string> = {
-        'Content-Type': 'application/json'
-      };
-
-      if (apiKey) {
-        headers['x-api-key'] = apiKey;
-      }
-
-      const response = await fetch(`${this.apiBase}/api/v2/external/return`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error(`[GameBuddiesReturn] Return request failed (${response.status}):`, errorText);
-
+      const socket = socketService.getSocket();
+      if (!socket?.connected) {
+        console.warn('[GameBuddiesReturn] Socket not connected, using fallback URL');
         this.isReturning = false;
         return {
           success: false,
           returnUrl: session?.returnUrl || `${this.apiBase}/lobby/${roomCode}`,
-          message: `Return request failed: ${response.status}`
+          message: 'Socket not connected'
         };
       }
 
-      const data = await response.json();
-      console.log('[GameBuddiesReturn] Return successful:', data);
+      // Emit socket event - server handles API call with server-side key
+      socket.emit('gamebuddies:return', {
+        roomCode,
+        mode,
+        reason: 'user_initiated'
+      });
 
+      // The server will emit 'gamebuddies:return-redirect' with the URL
+      // This method returns immediately; the redirect is handled by the event listener
       this.isReturning = false;
       return {
         success: true,
-        returnUrl: data.returnUrl || session?.returnUrl || `${this.apiBase}/lobby/${roomCode}`,
-        sessionToken: data.sessionToken,
-        playersReturned: data.playersReturned,
-        message: data.message
+        returnUrl: session?.returnUrl || `${this.apiBase}/lobby/${roomCode}`,
+        message: 'Return request sent via socket'
       };
 
     } catch (error) {
