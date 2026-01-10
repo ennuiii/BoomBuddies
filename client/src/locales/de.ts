@@ -85,9 +85,26 @@ export const de: Translations = {
 
   // Chat
   chat: {
+    title: 'Chat',
     typeMessage: 'Nachricht eingeben...',
     send: 'Senden',
+    sendMessage: 'Nachricht senden',
+    closeChat: 'Chat schließen',
     noMessages: 'Noch keine Nachrichten',
+    emptyHint: 'Sag Hallo zu deinen Mitspielern!',
+    slowDown: 'Langsamer...',
+  },
+
+  // Player List
+  playerList: {
+    title: 'Spieler',
+    you: 'Du',
+    host: 'Host',
+    premium: 'Premium',
+    pro: 'Pro',
+    kick: 'Kicken',
+    kickPlayer: 'Spieler kicken',
+    cancel: 'Abbrechen',
   },
 
   // Settings

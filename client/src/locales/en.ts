@@ -83,9 +83,26 @@ export const en = {
 
   // Chat
   chat: {
+    title: 'Chat',
     typeMessage: 'Type a message...',
     send: 'Send',
+    sendMessage: 'Send message',
+    closeChat: 'Close chat',
     noMessages: 'No messages yet',
+    emptyHint: 'Say hello to your teammates!',
+    slowDown: 'Slow down...',
+  },
+
+  // Player List
+  playerList: {
+    title: 'Players',
+    you: 'You',
+    host: 'Host',
+    premium: 'Premium',
+    pro: 'Pro',
+    kick: 'Kick',
+    kickPlayer: 'Kick player',
+    cancel: 'Cancel',
   },
 
   // Settings

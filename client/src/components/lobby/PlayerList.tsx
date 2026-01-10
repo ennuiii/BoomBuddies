@@ -7,6 +7,7 @@
 import React, { useState } from 'react';
 import { Crown, Wifi, WifiOff, UserMinus, X } from 'lucide-react';
 import type { Player, Team } from '../../types';
+import { t } from '../../utils/translations';
 
 interface PlayerListProps {
   players: Player[];
@@ -103,7 +104,7 @@ const PlayerList: React.FC<PlayerListProps> = ({
                 const tier = getNormalizedTier(player.premiumTier);
                 return tier && (
                   <span className={`player-premium-badge compact ${tier}`}>
-                    {tier === 'pro' ? 'Pro' : 'Premium'}
+                    {tier === 'pro' ? t('playerList.pro') : t('playerList.premium')}
                   </span>
                 );
               })()}
@@ -117,7 +118,7 @@ const PlayerList: React.FC<PlayerListProps> = ({
   return (
     <div className={`player-list ${className}`}>
       <div className="player-list-header">
-        <h3 className="player-list-title">Players</h3>
+        <h3 className="player-list-title">{t('playerList.title')}</h3>
         <span className="player-list-count">
           {players.filter(p => p.connected).length}/{players.length}
         </span>
@@ -158,12 +159,12 @@ const PlayerList: React.FC<PlayerListProps> = ({
               <div className="player-info">
                 <span className="player-name">
                   {player.name}
-                  {isMe && <span className="player-me-tag">(You)</span>}
+                  {isMe && <span className="player-me-tag">({t('playerList.you')})</span>}
                 </span>
                 {player.isHost && (
                   <span className="player-host-badge">
                     <Crown className="w-3 h-3" />
-                    Host
+                    {t('playerList.host')}
                   </span>
                 )}
                 {playerTeam && (
@@ -178,7 +179,7 @@ const PlayerList: React.FC<PlayerListProps> = ({
                   const tier = getNormalizedTier(player.premiumTier);
                   return tier && (
                     <span className={`player-premium-badge ${tier}`}>
-                      {tier === 'pro' ? 'Pro' : 'Premium'}
+                      {tier === 'pro' ? t('playerList.pro') : t('playerList.premium')}
                     </span>
                   );
                 })()}
@@ -191,15 +192,15 @@ const PlayerList: React.FC<PlayerListProps> = ({
                     <button
                       className="kick-confirm-btn confirm"
                       onClick={() => handleConfirmKick(player.id ?? player.socketId)}
-                      title="Confirm kick"
+                      title={t('playerList.kick')}
                       type="button"
                     >
-                      Kick
+                      {t('playerList.kick')}
                     </button>
                     <button
                       className="kick-confirm-btn cancel"
                       onClick={handleCancelKick}
-                      title="Cancel"
+                      title={t('playerList.cancel')}
                       type="button"
                     >
                       <X className="w-3 h-3" />
@@ -209,7 +210,7 @@ const PlayerList: React.FC<PlayerListProps> = ({
                   <button
                     className="kick-button"
                     onClick={() => handleKickClick(player.id ?? player.socketId)}
-                    title="Kick player"
+                    title={t('playerList.kickPlayer')}
                     type="button"
                   >
                     <UserMinus className="w-4 h-4" />

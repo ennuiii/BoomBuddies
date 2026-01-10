@@ -10,6 +10,7 @@ import { Send, X } from 'lucide-react';
 import type { ChatMessage } from '../../types';
 import socketService from '../../services/socketService';
 import { useTypewriterSound } from '../../hooks';
+import { t } from '../../utils/translations';
 
 interface ChatWindowProps {
   messages: ChatMessage[];
@@ -101,9 +102,9 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
     <div className={`chat-window ${mode} ${className}`}>
       {/* Header */}
       <div className="chat-header">
-        <h3 className="chat-title">Chat</h3>
+        <h3 className="chat-title">{t('chat.title')}</h3>
         {mode === 'floating' && onClose && (
-          <button onClick={onClose} className="chat-close-btn" aria-label="Close chat">
+          <button onClick={onClose} className="chat-close-btn" aria-label={t('chat.closeChat')}>
             <X className="w-4 h-4" />
           </button>
         )}
@@ -113,8 +114,8 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
       <div className="chat-messages">
         {messages.length === 0 ? (
           <div className="chat-empty">
-            <p>No messages yet</p>
-            <p className="chat-empty-hint">Say hello to your teammates!</p>
+            <p>{t('chat.noMessages')}</p>
+            <p className="chat-empty-hint">{t('chat.emptyHint')}</p>
           </div>
         ) : (
           messages.map((msg) => {
@@ -157,7 +158,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder={isRateLimited ? "Slow down..." : "Type a message..."}
+          placeholder={isRateLimited ? t('chat.slowDown') : t('chat.typeMessage')}
           className={`chat-input ${isRateLimited ? 'rate-limited' : ''}`}
           maxLength={200}
         />
@@ -165,7 +166,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
           onClick={handleSend}
           disabled={!inputValue.trim() || isRateLimited}
           className="chat-send-btn"
-          aria-label="Send message"
+          aria-label={t('chat.sendMessage')}
         >
           <Send className="w-4 h-4" />
         </button>
