@@ -150,7 +150,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
             <button
               onClick={onClose}
               className="settings-modal-close"
-              aria-label="Close settings"
+              aria-label={t('settings.close')}
             >
               <X className="w-5 h-5" />
             </button>
@@ -216,7 +216,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                       onClick={handleMusicToggle}
                       className={`settings-toggle ${musicEnabled ? 'on' : 'off'}`}
                     >
-                      {musicEnabled ? 'ON' : 'OFF'}
+                      {musicEnabled ? t('settings.on') : t('settings.off')}
                     </button>
                   </div>
                   <input
@@ -242,7 +242,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onClose }) => {
                       onClick={handleSfxToggle}
                       className={`settings-toggle ${sfxEnabled ? 'on' : 'off'}`}
                     >
-                      {sfxEnabled ? 'ON' : 'OFF'}
+                      {sfxEnabled ? t('settings.on') : t('settings.off')}
                     </button>
                   </div>
                   <input

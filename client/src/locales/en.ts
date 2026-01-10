@@ -42,6 +42,17 @@ export const en = {
     gameBuddiesBanner: 'Playing via GameBuddies.io',
   },
 
+  // Header
+  header: {
+    settings: 'Settings',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    menu: 'Menu',
+    howToPlay: 'How to Play',
+    learnTheRules: 'Learn the rules',
+    soundAndPreferences: 'Sound & preferences',
+  },
+
   // Lobby
   lobby: {
     waitingForPlayers: 'Waiting for players...',
@@ -95,6 +106,22 @@ export const en = {
     microphone: 'Microphone',
     virtualBackground: 'Virtual Background',
     videoDescription: 'Configure your camera and microphone settings.',
+    close: 'Close settings',
+    on: 'ON',
+    off: 'OFF',
+  },
+
+  // Game Header
+  gameHeader: {
+    room: 'Room',
+    copyRoomLink: 'Copy room link',
+    copyInviteLink: 'Copy invite link',
+    streamerMode: 'Streamer Mode',
+    waitingForPlayers: 'Waiting for players',
+    inProgress: 'In Progress',
+    gameOver: 'Game Over',
+    settings: 'Settings',
+    leave: 'Leave',
   },
 
   // Invite Modal

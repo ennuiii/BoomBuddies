@@ -18,6 +18,7 @@ import MobileGameMenu from './MobileGameMenu';
 import SettingsModal from './SettingsModal';
 import GameBuddiesReturnButton from './GameBuddiesReturnButton';
 import { VideoControlCluster } from '../video';
+import { t } from '../../utils/translations';
 
 interface GameHeaderProps {
   lobby: Lobby;
@@ -148,11 +149,11 @@ const GameHeader: React.FC<GameHeaderProps> = ({
   const getPhaseDisplay = (state: string) => {
     switch (state) {
       case 'lobby':
-        return 'Waiting for players';
+        return t('gameHeader.waitingForPlayers');
       case 'playing':
-        return 'In Progress';
+        return t('gameHeader.inProgress');
       case 'finished':
-        return 'Game Over';
+        return t('gameHeader.gameOver');
       default:
         return '';
     }
@@ -191,23 +192,23 @@ const GameHeader: React.FC<GameHeaderProps> = ({
           <div className="game-header-room-info desktop-only">
             {!hideRoomCode ? (
               <div className="game-header-room-code">
-                <span className="game-header-room-label">Room:</span>
+                <span className="game-header-room-label">{t('gameHeader.room')}:</span>
                 <span className="game-header-room-value">{lobby.code}</span>
                 <button
                   onClick={copyRoomLink}
                   className="game-header-copy-btn"
-                  title="Copy room link"
+                  title={t('gameHeader.copyRoomLink')}
                 >
                   {copyFeedback ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
             ) : (
               <div className="game-header-streamer-badge">
-                <span>Streamer Mode</span>
+                <span>{t('gameHeader.streamerMode')}</span>
                 <button
                   onClick={copyRoomLink}
                   className="game-header-copy-btn"
-                  title="Copy invite link"
+                  title={t('gameHeader.copyInviteLink')}
                 >
                   {copyFeedback ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -253,7 +254,7 @@ const GameHeader: React.FC<GameHeaderProps> = ({
             <button
               onClick={() => setIsSettingsOpen(true)}
               className="game-header-settings-btn"
-              title="Settings"
+              title={t('gameHeader.settings')}
             >
               <Settings className="w-4 h-4" />
             </button>
@@ -270,7 +271,7 @@ const GameHeader: React.FC<GameHeaderProps> = ({
 
             <button onClick={handleLeave} className="game-header-leave-btn">
               <ArrowLeft className="w-4 h-4" />
-              Leave
+              {t('gameHeader.leave')}
             </button>
           </div>
         )}

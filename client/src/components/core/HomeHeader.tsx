@@ -13,6 +13,7 @@ import { Settings, Menu, X, HelpCircle } from 'lucide-react';
 import { GAME_META } from '../../config/gameMeta';
 import { useIsMobile } from '../../hooks/useIsMobile';
 import SettingsModal from './SettingsModal';
+import { t } from '../../utils/translations';
 
 interface HomeHeaderProps {
   onTutorial?: () => void;
@@ -62,8 +63,8 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({ onTutorial }) => {
         <button
           onClick={() => setShowSettings(true)}
           className="home-header-settings-btn"
-          aria-label="Settings"
-          title="Settings"
+          aria-label={t('header.settings')}
+          title={t('header.settings')}
         >
           <Settings className="w-5 h-5" />
         </button>
@@ -74,7 +75,7 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({ onTutorial }) => {
         <button
           onClick={() => setIsMenuOpen(true)}
           className="home-header-hamburger"
-          aria-label="Open menu"
+          aria-label={t('header.openMenu')}
           aria-expanded={isMenuOpen}
         >
           <Menu className="w-5 h-5" />
@@ -106,11 +107,11 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({ onTutorial }) => {
               >
                 {/* Header */}
                 <div className="home-header-menu-header">
-                  <span className="home-header-menu-title">Menu</span>
+                  <span className="home-header-menu-title">{t('header.menu')}</span>
                   <button
                     onClick={() => setIsMenuOpen(false)}
                     className="home-header-menu-close"
-                    aria-label="Close menu"
+                    aria-label={t('header.closeMenu')}
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -127,8 +128,8 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({ onTutorial }) => {
                       <HelpCircle className="w-4 h-4" />
                     </div>
                     <div className="home-header-menu-content">
-                      <span className="home-header-menu-label">How to Play</span>
-                      <span className="home-header-menu-sublabel">Learn the rules</span>
+                      <span className="home-header-menu-label">{t('header.howToPlay')}</span>
+                      <span className="home-header-menu-sublabel">{t('header.learnTheRules')}</span>
                     </div>
                   </button>
 
@@ -141,8 +142,8 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({ onTutorial }) => {
                       <Settings className="w-4 h-4" />
                     </div>
                     <div className="home-header-menu-content">
-                      <span className="home-header-menu-label">Settings</span>
-                      <span className="home-header-menu-sublabel">Sound & preferences</span>
+                      <span className="home-header-menu-label">{t('header.settings')}</span>
+                      <span className="home-header-menu-sublabel">{t('header.soundAndPreferences')}</span>
                     </div>
                   </button>
                 </div>

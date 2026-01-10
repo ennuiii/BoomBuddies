@@ -44,6 +44,17 @@ export const de: Translations = {
     gameBuddiesBanner: 'Spielen über GameBuddies.io',
   },
 
+  // Header
+  header: {
+    settings: 'Einstellungen',
+    openMenu: 'Menü öffnen',
+    closeMenu: 'Menü schließen',
+    menu: 'Menü',
+    howToPlay: 'Spielanleitung',
+    learnTheRules: 'Lerne die Regeln',
+    soundAndPreferences: 'Ton & Einstellungen',
+  },
+
   // Lobby
   lobby: {
     waitingForPlayers: 'Warte auf Spieler...',
@@ -97,6 +108,22 @@ export const de: Translations = {
     microphone: 'Mikrofon',
     virtualBackground: 'Virtueller Hintergrund',
     videoDescription: 'Konfiguriere deine Kamera- und Mikrofoneinstellungen.',
+    close: 'Einstellungen schließen',
+    on: 'AN',
+    off: 'AUS',
+  },
+
+  // Game Header
+  gameHeader: {
+    room: 'Raum',
+    copyRoomLink: 'Raumlink kopieren',
+    copyInviteLink: 'Einladungslink kopieren',
+    streamerMode: 'Streamer-Modus',
+    waitingForPlayers: 'Warte auf Spieler',
+    inProgress: 'Läuft',
+    gameOver: 'Spiel vorbei',
+    settings: 'Einstellungen',
+    leave: 'Verlassen',
   },
 
   // Invite Modal
